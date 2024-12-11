@@ -13,7 +13,13 @@ const register = async (data) => {
   return true;
 };
 
+const checkEmailExists = async (email) => {
+  const [result] = await db.query(`SELECT COUNT(*) AS count FROM users WHERE email = '${email}'`);
+  return result[0].count > 0;
+};
+
 module.exports = {
   login,
   register,
+  checkEmailExists,
 };
